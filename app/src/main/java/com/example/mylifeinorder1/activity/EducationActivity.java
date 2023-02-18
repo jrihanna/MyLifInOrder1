@@ -11,26 +11,7 @@ import com.example.mylifeinorder1.R;
 
 public class EducationActivity extends HistoryWithAddressActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        LinearLayout currentLayout = findViewById(R.id.mainContainer);
-        currentLayout.addView(createEducation());
-
-        Button addAddress = findViewById(R.id.addAddress);
-        addAddress.setOnClickListener(view -> {
-            //TODO Add separator
-            currentLayout.addView(createEducation());
-        });
-    }
-
     private LinearLayout createEducation() {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
         params.setMargins(10,0,0,0);
 
         LinearLayout c = new LinearLayout(this);
@@ -48,7 +29,7 @@ public class EducationActivity extends HistoryWithAddressActivity {
         schoolPhone.setLayoutParams(params);
         schoolPhone.setHint("School Phone");
 
-        LinearLayout schoolAddress = createAddress();
+        LinearLayout schoolAddress = super.createLayout();
 
         EditText fieldOfStudy = new EditText(this);
         fieldOfStudy.setLayoutParams(params);

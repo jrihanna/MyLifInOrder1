@@ -8,7 +8,9 @@ public class HistoryWithAddressActivity extends HistoryActivity {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
     );
-    protected LinearLayout createAddress() {
+
+    @Override
+    public LinearLayout createLayout() {
         params.setMargins(10,0,0,0);
 
         LinearLayout c = new LinearLayout(this);

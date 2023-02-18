@@ -17,22 +17,22 @@ import android.widget.TextView;
 
 import com.example.mylifeinorder1.R;
 
-public class MainActivity extends HistoryWithAddressActivity {
+public class MainActivity extends InsuranceActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        LinearLayout currentLayout = findViewById(R.id.mainContainer);
-        currentLayout.addView(createAddress());
-
-        Button addAddress = findViewById(R.id.addAddress);
-        addAddress.setOnClickListener(view -> {
-            //TODO Add separator
-            currentLayout.addView(createAddress());
-        });
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        LinearLayout currentLayout = findViewById(R.id.mainContainer);
+//        currentLayout.addView(createAddress());
+//
+//        Button addAddress = findViewById(R.id.addAddress);
+//        addAddress.setOnClickListener(view -> {
+//            //TODO Add separator
+//            currentLayout.addView(createAddress());
+//        });
+//    }
 
     /*private LinearLayout createAddress() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

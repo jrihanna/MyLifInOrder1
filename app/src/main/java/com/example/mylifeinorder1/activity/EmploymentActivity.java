@@ -12,25 +12,8 @@ import com.example.mylifeinorder1.R;
 public class EmploymentActivity extends HistoryWithAddressActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public LinearLayout createLayout() {
 
-        LinearLayout currentLayout = findViewById(R.id.mainContainer);
-        currentLayout.addView(createEmployment());
-
-        Button addAddress = findViewById(R.id.addAddress);
-        addAddress.setOnClickListener(view -> {
-            //TODO Add separator
-            currentLayout.addView(createEmployment());
-        });
-    }
-
-    private LinearLayout createEmployment() {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
         params.setMargins(10,0,0,0);
 
         LinearLayout c = new LinearLayout(this);
@@ -52,7 +35,7 @@ public class EmploymentActivity extends HistoryWithAddressActivity {
         companyPhone.setLayoutParams(params);
         companyPhone.setHint("Company Phone");
 
-        LinearLayout companyAddress = createAddress();
+        LinearLayout companyAddress = super.createLayout();
 
 
         c.addView(companyName);

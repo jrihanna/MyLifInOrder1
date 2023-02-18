@@ -19,6 +19,22 @@ import java.util.Locale;
 
 public abstract class HistoryActivity extends AppCompatActivity {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        LinearLayout currentLayout = findViewById(R.id.mainContainer);
+        currentLayout.addView(createLayout());
+
+        Button addAddress = findViewById(R.id.addAddress);
+        addAddress.setOnClickListener(view -> {
+            //TODO Add separator
+            currentLayout.addView(createLayout());
+        });
+    }
+    public abstract LinearLayout createLayout();
+
     protected LinearLayout createDates(Context context) {
 
         final Calendar calendar = Calendar.getInstance();
