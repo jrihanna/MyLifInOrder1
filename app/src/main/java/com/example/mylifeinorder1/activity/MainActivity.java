@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.example.mylifeinorder1.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends HistoryWithAddressActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +25,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout currentLayout = findViewById(R.id.mainContainer);
-        currentLayout.addView(createEmployment());
+        currentLayout.addView(createAddress());
 
         Button addAddress = findViewById(R.id.addAddress);
         addAddress.setOnClickListener(view -> {
             //TODO Add separator
-            currentLayout.addView(createEmployment());
+            currentLayout.addView(createAddress());
         });
     }
 
-    private LinearLayout createAddress() {
+    /*private LinearLayout createAddress() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -76,11 +76,12 @@ public class MainActivity extends AppCompatActivity {
         c.addView(suburb);
         c.addView(state);
         c.addView(postCode);
+        c.addView(createDates(this));
 
         return c;
-    }
+    }*/
 
-    private LinearLayout createEmployment() {
+    /*private LinearLayout createEmployment() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -111,4 +112,46 @@ public class MainActivity extends AppCompatActivity {
 
         return c;
     }
+
+    private LinearLayout createEducation() {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(10,0,0,0);
+
+        LinearLayout c = new LinearLayout(this);
+        c.setOrientation(LinearLayout.VERTICAL);
+
+        EditText schoolName = new EditText(this);
+        schoolName.setLayoutParams(params);
+        schoolName.setHint("School Name");
+
+        EditText schoolEmail = new EditText(this);
+        schoolEmail.setLayoutParams(params);
+        schoolEmail.setHint("School Email");
+
+        EditText schoolPhone = new EditText(this);
+        schoolPhone.setLayoutParams(params);
+        schoolPhone.setHint("School Phone");
+
+        LinearLayout schoolAddress = createAddress();
+
+        EditText fieldOfStudy = new EditText(this);
+        fieldOfStudy.setLayoutParams(params);
+        fieldOfStudy.setHint("Field of Study");
+
+        EditText grade = new EditText(this);
+        grade.setLayoutParams(params);
+        grade.setHint("Grade");
+
+        c.addView(schoolName);
+        c.addView(schoolEmail);
+        c.addView(schoolPhone);
+        c.addView(schoolAddress);
+        c.addView(fieldOfStudy);
+        c.addView(grade);
+
+        return c;
+    }*/
 }

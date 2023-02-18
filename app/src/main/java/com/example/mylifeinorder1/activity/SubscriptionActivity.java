@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mylifeinorder1.R;
 
-public class AddressActivity extends HistoryWithAddressActivity {
+public class SubscriptionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,13 +16,12 @@ public class AddressActivity extends HistoryWithAddressActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout currentLayout = findViewById(R.id.mainContainer);
-        currentLayout.addView(createAddress());
+//        currentLayout.addView(createEducation());
 
         Button addAddress = findViewById(R.id.addAddress);
         addAddress.setOnClickListener(view -> {
             //TODO Add separator
-            currentLayout.addView(createAddress());
+//            currentLayout.addView(createEducation());
         });
     }
-
 }
