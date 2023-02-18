@@ -1,22 +1,5 @@
 package com.example.mylifeinorder1.activity;
 
-import androidx.annotation.IntDef;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.mylifeinorder1.R;
-
 public class MainActivity extends InsuranceActivity {
 
 //    @Override
