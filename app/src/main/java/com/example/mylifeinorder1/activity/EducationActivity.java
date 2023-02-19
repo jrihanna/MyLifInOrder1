@@ -3,9 +3,9 @@ package com.example.mylifeinorder1.activity;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-public class EducationActivity extends HistoryWithAddressActivity {
+public class EducationActivity { //extends HistoryWithAddressActivity
 
-    private LinearLayout createEducation() {
+    /*private LinearLayout createEducation() {
         params.setMargins(10,0,0,0);
 
         LinearLayout c = new LinearLayout(this);
@@ -43,4 +43,8 @@ public class EducationActivity extends HistoryWithAddressActivity {
         return c;
     }
 
+    @Override
+    public void saveLayout() {
+
+    }*/
 }

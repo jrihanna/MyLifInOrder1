@@ -3,9 +3,9 @@ package com.example.mylifeinorder1.activity;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-public class SubscriptionActivity extends HistoryActivity {
+public class SubscriptionActivity { // extends HistoryActivity
 
-    @Override
+    /*@Override
     public LinearLayout createLayout() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -35,5 +35,5 @@ public class SubscriptionActivity extends HistoryActivity {
         c.addView(createDates(this));
 
         return c;
-    }
+    }*/
 }

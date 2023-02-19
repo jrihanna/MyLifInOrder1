@@ -2,7 +2,9 @@ package com.example.mylifeinorder1.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.mylifeinorder1.R;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -25,13 +29,20 @@ public abstract class HistoryActivity extends AppCompatActivity {
         LinearLayout currentLayout = findViewById(R.id.mainContainer);
         currentLayout.addView(createLayout());
 
-        Button addAddress = findViewById(R.id.addAddress);
-        addAddress.setOnClickListener(view -> {
+        Button addLayout = findViewById(R.id.addAddress);
+        addLayout.setOnClickListener(view -> {
             //TODO Add separator
             currentLayout.addView(createLayout());
         });
+
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(view -> {
+            saveLayout();
+        });
     }
     public abstract LinearLayout createLayout();
+
+    public abstract void saveLayout();
 
     protected LinearLayout createDates(Context context) {
 
@@ -86,6 +97,20 @@ public abstract class HistoryActivity extends AppCompatActivity {
         return dc;
     }
 
+    protected String getLayoutEditTextValue(LinearLayout layout, int childIndex) {
+        EditText t = ((EditText)layout.getChildAt(childIndex));
+        return t.getText() == null ? "" : t.getText().toString();
+    }
+
+    protected LocalDate getDates(LinearLayout datesLayout, int index) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+            if(!getLayoutEditTextValue(datesLayout, index).isEmpty())
+                return LocalDate.parse(getLayoutEditTextValue(datesLayout, 1), formatter);
+        }
+
+        return null;
+    }
     private void updateLabel(Calendar calendar, EditText view){
         String myFormat="MM/dd/yy";
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);

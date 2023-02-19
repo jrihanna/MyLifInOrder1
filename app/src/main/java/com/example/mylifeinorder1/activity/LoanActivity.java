@@ -4,9 +4,9 @@ import android.text.InputType;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-public class LoanActivity extends HistoryActivity {
+public class LoanActivity { // extends HistoryActivity
 
-    @Override
+   /* @Override
     public LinearLayout createLayout() {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -35,5 +35,5 @@ public class LoanActivity extends HistoryActivity {
         c.addView(amount);
 
         return c;
-    }
+    }*/
 }
