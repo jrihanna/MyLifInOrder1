@@ -1,16 +1,26 @@
 package com.example.mylifeinorder1.activity;
 
+import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.model.Employment;
 import com.example.mylifeinorder1.model.Residence;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmploymentActivity extends HistoryWithAddressActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        mainContainerId = R.id.mainEmploymentContainer;
+        mainViewId = R.layout.activity_employment;
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public LinearLayout createLayout() {
@@ -31,6 +41,7 @@ public class EmploymentActivity extends HistoryWithAddressActivity {
         EditText companyEmail = new EditText(this);
         companyEmail.setLayoutParams(params);
         companyEmail.setHint("Company Email");
+        companyEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         EditText companyPhone = new EditText(this);
         companyPhone.setLayoutParams(params);
@@ -53,21 +64,33 @@ public class EmploymentActivity extends HistoryWithAddressActivity {
         LinearLayout currentLayout = findViewById(R.id.mainContainer);
         int childCount = currentLayout.getChildCount();
 
-        List<Residence> employments = new ArrayList<>();
+        List<Employment> employments = new ArrayList<>();
 
         // skip the buttons
-        for(int i = 2; i < childCount; i++) {
+        for(int i = 1; i < childCount; i++) {
             View v = currentLayout.getChildAt(i);
 
             if(v instanceof LinearLayout) {
-                LinearLayout employment = (LinearLayout) v;
+                LinearLayout employmentLayout = (LinearLayout) v;
+                Employment employment = new Employment();
+                employment.setName(getLayoutEditTextValue(employmentLayout, 0));
+                employment.setRole(getLayoutEditTextValue(employmentLayout, 1));
+                employment.setEmailAddress(getLayoutEditTextValue(employmentLayout, 2));
 
-                // 0: company name
-                // 1 role
-                // 2: email
-                // 3: phone
-                // 4: address and dates
+                // TODO: format phone number
+                employment.setNumber(getLayoutEditTextValue(employmentLayout, 3));
+
+                LinearLayout addressLayout = (LinearLayout) employmentLayout.getChildAt(4);
+                employment.setAddress(getAddress(addressLayout));
+
+                LinearLayout dates = (LinearLayout)(addressLayout).getChildAt(6);
+                employment.setFromDate(getDates(dates, 0));
+                employment.setToDate(getDates(dates, 1));
+
+                employments.add(employment);
             }
         }
+
+        System.out.println(employments);
     }
 }

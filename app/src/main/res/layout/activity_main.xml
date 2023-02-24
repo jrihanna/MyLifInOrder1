@@ -17,24 +17,57 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
+        android:padding="5dp"
         >
-        <Button
-            android:id="@+id/addAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/add"
-            />
 
-        <Button
-            android:id="@+id/saveButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/save"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/mushroomhouse"
+                android:contentDescription="House icon" />
+            <TextView
+                android:id="@+id/residenceHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/residence_history"
+                android:clickable="true"
+                android:focusable="true"
+                android:minHeight="50dp"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:paddingEnd="5dp"
+                android:src="@drawable/mushroomhouse"
+                android:contentDescription="House icon" />
+            <TextView
+                android:id="@+id/employmentHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/employment_history"
+                android:clickable="true"
+                android:focusable="true"
+                android:minHeight="50dp"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <!--<RelativeLayout

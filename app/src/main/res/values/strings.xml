@@ -3,4 +3,7 @@
     <string name="button">Button</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
+
+    <string name="residence_history">History of Residence</string>
+    <string name="employment_history">History of Employment</string>
 </resources>

@@ -28,7 +28,7 @@ public class ResidenceActivity extends HistoryWithAddressActivity {
         List<Residence> residences = new ArrayList<>();
 
         // skip the buttons
-        for(int i = 2; i < childCount; i++) {
+        for(int i = 1; i < childCount; i++) {
             View v = currentLayout.getChildAt(i);
 
             if(v instanceof LinearLayout) {
@@ -46,25 +46,12 @@ public class ResidenceActivity extends HistoryWithAddressActivity {
         // TODO: save the list
     }
 
-    /*@Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mainContainerId = R.id.mainAddressContainer;
+        mainViewId = R.layout.activity_address;
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        LinearLayout currentLayout = findViewById(R.id.mainContainer);
-//        currentLayout.addView(createAddress());
-
-        Button saveButton = findViewById(R.id.saveButton);
-        saveButton.setOnClickListener(view -> {
-            int childCount = currentLayout.getChildCount();
-            for(int i = 0; i < childCount; i++) {
-                View v = currentLayout.getChildAt(i);
-                if(v instanceof EditText) {
-                    System.out.println(((EditText)v).getText().toString());
-                }
-            }
-        });
-    }*/
+    }
 
 
 }

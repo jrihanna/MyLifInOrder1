@@ -21,15 +21,21 @@ import java.util.Locale;
 
 public abstract class HistoryActivity extends AppCompatActivity {
 
+    protected int mainContainerId = 0;
+    protected int mainViewId = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        LinearLayout currentLayout = findViewById(R.id.mainContainer);
+        // R.layout.activity_employment
+        setContentView(mainViewId);
+
+        // R.id.mainContainer
+        LinearLayout currentLayout = findViewById(mainContainerId);
         currentLayout.addView(createLayout());
 
-        Button addLayout = findViewById(R.id.addAddress);
+        Button addLayout = findViewById(R.id.addButton);
         addLayout.setOnClickListener(view -> {
             //TODO Add separator
             currentLayout.addView(createLayout());
