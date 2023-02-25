@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".activity.ResidenceActivity">
+    tools:context=".activity.ResidenceActivity"
+    android:background="#F8FFFE">
 
     <LinearLayout
         android:id="@+id/mainAddressContainer"

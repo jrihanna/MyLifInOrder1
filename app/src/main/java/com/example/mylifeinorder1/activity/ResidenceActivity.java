@@ -27,7 +27,6 @@ public class ResidenceActivity extends HistoryWithAddressActivity {
 
         List<Residence> residences = new ArrayList<>();
 
-        // skip the buttons
         for(int i = 0; i < childCount; i++) {
             View v = currentLayout.getChildAt(i);
 

@@ -40,7 +40,10 @@ public abstract class HistoryActivity extends AppCompatActivity {
         Button addLayout = findViewById(R.id.addButton);
         addLayout.setOnClickListener(view -> {
             currentLayout.addView(addSeparatorView());
-            currentLayout.addView(createLayout());
+
+            LinearLayout newLayout = createLayout();
+            currentLayout.addView(newLayout);
+            newLayout.addView(addRemoveButton());
         });
 
         Button saveButton = findViewById(R.id.saveButton);
@@ -125,11 +128,25 @@ public abstract class HistoryActivity extends AppCompatActivity {
         view.setText(dateFormat.format(calendar.getTime()));
     }
 
+    private Button addRemoveButton() {
+        Button removeButton = new Button(this);
+        removeButton.setText("Remove");
+        LinearLayout.LayoutParams removeButtonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        removeButton.setLayoutParams(removeButtonLayoutParams);
+        removeButton.setOnClickListener(view -> {
+            ((ViewGroup) view.getParent().getParent()).removeView((ViewGroup) view.getParent());
+        });
+
+        return removeButton;
+    }
     private View addSeparatorView() {
         View separator = new View(this);
-        LinearLayout.LayoutParams separatorLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        LinearLayout.LayoutParams separatorLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                10);
         separatorLayoutParams.setMargins(0, 30, 0, 0);
         separator.setLayoutParams(separatorLayoutParams);
+        separator.setBackgroundColor(Color.WHITE);
 
         return separator;
     }
