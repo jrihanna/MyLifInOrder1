@@ -1,9 +1,15 @@
 <resources>
-    <string name="app_name">My Life In Order1</string>
+    <string name="app_name">My Life In Order</string>
     <string name="button">Button</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
+    <string name="mockUpText">Text</string>
 
     <string name="residence_history">History of Residence</string>
     <string name="employment_history">History of Employment</string>
+    <string name="education_history">History of Education</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="insurances">Insurances</string>
+    <string name="loans">Loans</string>
+    <string name="doctors">My Doctors</string>
 </resources>

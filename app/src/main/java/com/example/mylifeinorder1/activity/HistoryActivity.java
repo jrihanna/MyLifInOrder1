@@ -2,9 +2,11 @@ package com.example.mylifeinorder1.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -32,12 +34,12 @@ public abstract class HistoryActivity extends AppCompatActivity {
         setContentView(mainViewId);
 
         // R.id.mainContainer
-        LinearLayout currentLayout = findViewById(mainContainerId);
+        LinearLayout currentLayout = findViewById(R.id.itemContainer);
         currentLayout.addView(createLayout());
 
         Button addLayout = findViewById(R.id.addButton);
         addLayout.setOnClickListener(view -> {
-            //TODO Add separator
+            currentLayout.addView(addSeparatorView());
             currentLayout.addView(createLayout());
         });
 
@@ -122,4 +124,14 @@ public abstract class HistoryActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
         view.setText(dateFormat.format(calendar.getTime()));
     }
+
+    private View addSeparatorView() {
+        View separator = new View(this);
+        LinearLayout.LayoutParams separatorLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        separatorLayoutParams.setMargins(0, 30, 0, 0);
+        separator.setLayoutParams(separatorLayoutParams);
+
+        return separator;
+    }
+
 }

@@ -22,13 +22,13 @@ import java.util.Locale;
 public class ResidenceActivity extends HistoryWithAddressActivity {
     @Override
     public void saveLayout() {
-        LinearLayout currentLayout = findViewById(R.id.mainContainer);
+        LinearLayout currentLayout = findViewById(R.id.itemContainer);
         int childCount = currentLayout.getChildCount();
 
         List<Residence> residences = new ArrayList<>();
 
         // skip the buttons
-        for(int i = 1; i < childCount; i++) {
+        for(int i = 0; i < childCount; i++) {
             View v = currentLayout.getChildAt(i);
 
             if(v instanceof LinearLayout) {

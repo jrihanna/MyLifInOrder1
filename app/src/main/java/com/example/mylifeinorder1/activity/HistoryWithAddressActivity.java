@@ -1,5 +1,6 @@
 package com.example.mylifeinorder1.activity;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -23,9 +24,18 @@ public abstract class HistoryWithAddressActivity extends HistoryActivity {
     public LinearLayout createLayout() {
         params.setMargins(10,0,0,0);
 
+        GradientDrawable border = new GradientDrawable();
+        border.setColor(0xFFFFFFFF); //white background
+        border.setStroke(1, 0xFF000000); //black border with full opacity
+
         LinearLayout c = new LinearLayout(this);
         c.setOrientation(LinearLayout.VERTICAL);
         c.setId(counter++);
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            c.setBackgroundDrawable(border);
+        } else {
+            c.setBackground(border);
+        }
 
         EditText country = new EditText(this);
         country.setLayoutParams(params);
