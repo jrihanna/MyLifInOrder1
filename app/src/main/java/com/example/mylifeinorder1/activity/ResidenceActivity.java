@@ -43,6 +43,7 @@ public class ResidenceActivity extends HistoryWithAddressActivity {
         }
 
         // TODO: save the list
+        saveData(residences, ActivityType.RESIDENCE);
     }
 
     @Override

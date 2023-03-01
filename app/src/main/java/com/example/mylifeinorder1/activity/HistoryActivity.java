@@ -2,6 +2,7 @@ package com.example.mylifeinorder1.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,11 +15,18 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.model.History;
+import com.example.mylifeinorder1.model.Residence;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public abstract class HistoryActivity extends AppCompatActivity {
@@ -42,14 +50,17 @@ public abstract class HistoryActivity extends AppCompatActivity {
             currentLayout.addView(addSeparatorView());
 
             LinearLayout newLayout = createLayout();
-            currentLayout.addView(newLayout);
             newLayout.addView(addRemoveButton());
+            currentLayout.addView(newLayout);
         });
 
         Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(view -> {
             saveLayout();
         });
+
+        List<History> df = loadData(ActivityType.RESIDENCE);
+        System.out.println("ssfsff");
     }
     public abstract LinearLayout createLayout();
 
@@ -122,6 +133,32 @@ public abstract class HistoryActivity extends AppCompatActivity {
 
         return null;
     }
+
+    protected void saveData(List<? extends History> items, ActivityType type) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MLIO Data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(items);
+        editor.putString(type.name(), json);
+        editor.apply();
+    }
+
+    protected List<History> loadData(ActivityType activityType) {
+        List<History> result = new ArrayList<>();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MLIO Data", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(activityType.name(), null);
+        Type type = new TypeToken<List<Residence>>() {}.getType();
+        result = gson.fromJson(json, type);
+
+        if (result == null) {
+            result = new ArrayList<>();
+        }
+
+        return result;
+    }
+
     private void updateLabel(Calendar calendar, EditText view){
         String myFormat="MM/dd/yy";
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
@@ -143,12 +180,13 @@ public abstract class HistoryActivity extends AppCompatActivity {
     private View addSeparatorView() {
         View separator = new View(this);
         LinearLayout.LayoutParams separatorLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                10);
-        separatorLayoutParams.setMargins(0, 30, 0, 0);
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        separatorLayoutParams.setMargins(0, 40, 0, 0);
         separator.setLayoutParams(separatorLayoutParams);
         separator.setBackgroundColor(Color.WHITE);
 
         return separator;
     }
+
 
 }
