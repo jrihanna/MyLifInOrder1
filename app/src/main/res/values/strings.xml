@@ -4,6 +4,7 @@
     <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="mockUpText">Text</string>
+    <string name="emptyText"> </string>
 
     <string name="residence_history">History of Residence</string>
     <string name="employment_history">History of Employment</string>

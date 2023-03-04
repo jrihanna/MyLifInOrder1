@@ -2,15 +2,13 @@ package com.example.mylifeinorder1.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.mylifeinorder1.R;
-import com.example.mylifeinorder1.model.LioItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.model.LioItem;
 
 import java.util.ArrayList;
 import java.util.List;

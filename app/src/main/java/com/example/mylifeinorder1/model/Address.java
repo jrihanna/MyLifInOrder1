@@ -7,10 +7,10 @@ public class Address {
     private String line2;
     private String suburb;
     private String state;
-    private Integer postCode;
+    private String postCode;
 
     public Address(){}
-    public Address(String country, String street, String line2, String suburb, String state, Integer postCode) {
+    public Address(String country, String street, String line2, String suburb, String state, String postCode) {
         this.country = country;
         this.street = street;
         this.line2 = line2;
@@ -59,11 +59,11 @@ public class Address {
         this.state = state;
     }
 
-    public Integer getPostCode() {
+    public String getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(Integer postCode) {
+    public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 }

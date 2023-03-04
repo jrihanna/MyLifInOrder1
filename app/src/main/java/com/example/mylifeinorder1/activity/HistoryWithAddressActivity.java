@@ -75,7 +75,7 @@ public abstract class HistoryWithAddressActivity extends HistoryActivity {
         address.setState(getLayoutEditTextValue(addressLayout, 4));
 
         if(!getLayoutEditTextValue(addressLayout, 5).isEmpty())
-            address.setPostCode(Integer.parseInt(getLayoutEditTextValue(addressLayout, 5)));
+            address.setPostCode(getLayoutEditTextValue(addressLayout, 5));
 
         return address;
     }

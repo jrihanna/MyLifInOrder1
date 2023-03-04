@@ -34,7 +34,7 @@ public abstract class HistoryActivity extends AppCompatActivity {
     protected int mainContainerId = 0;
     protected int mainViewId = 0;
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -61,7 +61,7 @@ public abstract class HistoryActivity extends AppCompatActivity {
 
         List<History> df = loadData(ActivityType.RESIDENCE);
         System.out.println("ssfsff");
-    }
+    }*/
     public abstract LinearLayout createLayout();
 
     public abstract void saveLayout();
@@ -165,7 +165,7 @@ public abstract class HistoryActivity extends AppCompatActivity {
         view.setText(dateFormat.format(calendar.getTime()));
     }
 
-    private Button addRemoveButton() {
+    protected Button addRemoveButton() {
         Button removeButton = new Button(this);
         removeButton.setText("Remove");
         LinearLayout.LayoutParams removeButtonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -177,7 +177,7 @@ public abstract class HistoryActivity extends AppCompatActivity {
 
         return removeButton;
     }
-    private View addSeparatorView() {
+    protected View addSeparatorView() {
         View separator = new View(this);
         LinearLayout.LayoutParams separatorLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

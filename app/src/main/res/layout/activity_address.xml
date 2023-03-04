@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,105 @@
     tools:context=".activity.ResidenceActivity"
     android:background="#F8FFFE">
 
+
+    <!-- Button section -->
+    <!--<LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">-->
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="vertical">-->
+
+    <!--<EditText
+            android:id="@+id/line2EditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/mockUpText"
+            android:hint="Line 2"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/suburbEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/mockUpText"
+            android:hint="Suburb"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/stateEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/mockUpText"
+            android:hint="State"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/postCodeEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/mockUpText"
+            android:hint="PostCode"
+            android:textSize="25sp"
+            android:inputType="number"
+            android:textColor="@color/black"/>-->
+<!--
+    </LinearLayout>-->
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="vertical">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/background_light" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginEnd="186dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/add" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="17dp"
+        android:layout_toEndOf="@+id/add_button"
+        android:text="@string/save" />
+    <!-- End of button section -->
+    <!--<LinearLayout
         android:id="@+id/mainAddressContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,5 +155,5 @@
                 android:layout_margin="5dp"
                 />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </LinearLayout>-->
+</RelativeLayout>
