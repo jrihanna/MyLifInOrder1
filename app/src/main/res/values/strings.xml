@@ -13,4 +13,15 @@
     <string name="insurances">Insurances</string>
     <string name="loans">Loans</string>
     <string name="doctors">My Doctors</string>
+
+    <!-- Address -->
+    <string name="country">Country</string>
+    <string name="street">Street</string>
+    <string name="line2">Line 2</string>
+    <string name="suburb">Suburb</string>
+    <string name="state">State</string>
+    <string name="post_code">Post Code</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+
 </resources>

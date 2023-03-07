@@ -81,6 +81,8 @@ public class ResidenceActivity extends AppCompatActivity {
 
         loadData();
         buildRecyclerView();
+
+
         setInsertButton();
 
         Button buttonSave = findViewById(R.id.save_button);

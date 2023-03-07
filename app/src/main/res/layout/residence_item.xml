@@ -36,80 +36,22 @@
 
 
         <!-- Main info section -->
-        <!--<include layout="@layout/date_item" />
--->
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp">
 
-            <EditText
-                android:id="@+id/country_text_view"
+            <include layout="@layout/address_item"
+                android:id="@+id/address_panel_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/mockUpText"
-                android:hint="Country"
-                android:textSize="25sp"
-                android:textColor="@color/black"/>
+                android:layout_height="wrap_content" />
 
-            <EditText
-                android:id="@+id/street_text_view"
+            <include layout="@layout/date_item"
+                android:id="@+id/date_panel_address"
+                android:layout_below="@+id/address_panel_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/mockUpText"
-                android:hint="Street"
-                android:textSize="25sp"
-                android:layout_below="@+id/country_text_view"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:id="@+id/line2TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/mockUpText"
-                android:hint="Line 2"
-                android:textSize="25sp"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:id="@+id/suburbTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/mockUpText"
-                android:hint="Suburb"
-                android:textSize="25sp"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:id="@+id/stateTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/mockUpText"
-                android:hint="State"
-                android:textSize="25sp"
-                android:textColor="@color/black"/>
-
-            <EditText
-                android:id="@+id/postCodeTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/mockUpText"
-                android:hint="PostCode"
-                android:textSize="25sp"
-                android:inputType="number"
-                android:textColor="@color/black"/>
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
