@@ -33,4 +33,9 @@
     <!-- Employment -->
     <string name="role">Role</string>
 
+    <!-- Education -->
+    <string name="field_of_study">Field of Study</string>
+    <string name="grade">Grade</string>
+
+
 </resources>

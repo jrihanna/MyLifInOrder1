@@ -22,7 +22,7 @@ public abstract class HistoryWithAddressActivity extends HistoryActivity {
     );
 
 
-    protected Address getAddress(LinearLayout addressLayout) {
+    /*protected Address getAddress(LinearLayout addressLayout) {
         Address address = new Address();
         address.setCountry(getLayoutEditTextValue(addressLayout, 0));
         address.setStreet(getLayoutEditTextValue(addressLayout, 1));
@@ -34,5 +34,5 @@ public abstract class HistoryWithAddressActivity extends HistoryActivity {
             address.setPostCode(getLayoutEditTextValue(addressLayout, 5));
 
         return address;
-    }
+    }*/
 }

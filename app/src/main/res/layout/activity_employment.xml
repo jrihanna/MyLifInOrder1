@@ -13,6 +13,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.MyLifeInOrder1">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:navigationIcon="@drawable/employment_svg"
+                app:popupTheme="@style/Theme.MyLifeInOrder1"
+                app:title="@string/employment_history"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:titleTextColor="@color/design_default_color_on_primary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -21,7 +37,6 @@
 
         <include layout="@layout/button_section"
             android:id="@+id/button_section"
-            android:layout_below="@+id/main_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

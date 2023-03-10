@@ -5,4 +5,5 @@ public class Constants {
 
     public static final String SHARED_PREFERENCE_ADDRESS = "address list";
     public static final String SHARED_PREFERENCE_EMPLOYMENT = "employment list";
+    public static final String SHARED_PREFERENCE_EDUCATION = "education list";
 }
