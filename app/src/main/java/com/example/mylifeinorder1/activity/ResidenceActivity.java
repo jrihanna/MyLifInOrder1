@@ -18,6 +18,7 @@ import com.example.mylifeinorder1.model.Address;
 import com.example.mylifeinorder1.model.History;
 import com.example.mylifeinorder1.model.LioItem;
 import com.example.mylifeinorder1.model.Residence;
+import com.example.mylifeinorder1.util.Constants;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -35,53 +36,16 @@ public class ResidenceActivity extends AppCompatActivity {
 
     List<Residence> residenceList;
 
-    private RecyclerView mRecyclerView;
     private ResidenceAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
-//    @Override
-    public void saveLayout() {
-        LinearLayout currentLayout = findViewById(R.id.itemContainer);
-        int childCount = currentLayout.getChildCount();
-
-        List<Residence> residences = new ArrayList<>();
-
-        for(int i = 0; i < childCount; i++) {
-            View v = currentLayout.getChildAt(i);
-
-            if(v instanceof LinearLayout) {
-                LinearLayout addressLayout = (LinearLayout)v;
-//                Residence residence = new Residence(getAddress(addressLayout));
-
-                LinearLayout dates = (LinearLayout)((LinearLayout) v).getChildAt(6);
-//                residence.setFromDate(getDates(dates, 0));
-//                residence.setToDate(getDates(dates, 1));
-//
-//                residences.add(residence);
-            }
-        }
-
-        // TODO: save the list
-//        saveData(residences, ActivityType.RESIDENCE);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /*mainContainerId = R.id.mainAddressContainer;
-        mainViewId = R.layout.activity_address;
-        super.onCreate(savedInstanceState);*/
-
         super.onCreate(savedInstanceState);
-
-        // R.layout.activity_employment
         setContentView(R.layout.activity_address);
-
-//        residenceList = new ArrayList<>();
-//        residenceList.add(new Residence(new Address("werw", null, null, null, null, null)));
 
         loadData();
         buildRecyclerView();
-
 
         setInsertButton();
 
@@ -102,10 +66,10 @@ public class ResidenceActivity extends AppCompatActivity {
         mAdapter.notifyItemInserted(residenceList.size());
     }
 
-    public void buildRecyclerView() {
-        mRecyclerView = findViewById(R.id.recyclerView);
+    private void buildRecyclerView() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(false);
-        mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ResidenceAdapter(residenceList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -114,9 +78,9 @@ public class ResidenceActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("lifeInOrder4", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("address list", null);
+        String json = sharedPreferences.getString(Constants.SHARED_PREFERENCE_ADDRESS, null);
         Type type = new TypeToken<ArrayList<Residence>>() {}.getType();
         this.residenceList = gson.fromJson(json, type);
 
@@ -124,14 +88,13 @@ public class ResidenceActivity extends AppCompatActivity {
             this.residenceList = new ArrayList<>();
         }
     }
-    private void saveData() {
-        mAdapter.notifyDataSetChanged();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("lifeInOrder3", MODE_PRIVATE);
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(this.residenceList);
-        editor.putString("address list", json);
+        editor.putString(Constants.SHARED_PREFERENCE_ADDRESS, json);
         editor.apply();
     }
 

@@ -21,50 +21,6 @@ public abstract class HistoryWithAddressActivity extends HistoryActivity {
             LinearLayout.LayoutParams.WRAP_CONTENT
     );
 
-    @Override
-    public LinearLayout createLayout() {
-        params.setMargins(10,0,0,0);
-
-        LinearLayout c = new LinearLayout(this);
-        c.setOrientation(LinearLayout.VERTICAL);
-        c.setId(counter++);
-//        c.setBackgroundColor(Color.parseColor("#BFFCF7"));
-
-        EditText country = new EditText(this);
-        country.setLayoutParams(params);
-        country.setHint("Country");
-
-        EditText street = new EditText(this);
-        street.setLayoutParams(params);
-        street.setHint("Street");
-
-        EditText line2 = new EditText(this);
-        line2.setLayoutParams(params);
-        line2.setHint("Line 2");
-
-        EditText suburb = new EditText(this);
-        suburb.setLayoutParams(params);
-        suburb.setHint("Suburb");
-
-        EditText state = new EditText(this);
-        state.setLayoutParams(params);
-        state.setHint("State");
-
-        EditText postCode = new EditText(this);
-        postCode.setLayoutParams(params);
-        postCode.setHint("Post Code");
-
-
-        c.addView(country);
-        c.addView(street);
-        c.addView(line2);
-        c.addView(suburb);
-        c.addView(state);
-        c.addView(postCode);
-        c.addView(createDates(this));
-
-        return c;
-    }
 
     protected Address getAddress(LinearLayout addressLayout) {
         Address address = new Address();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,152 +7,24 @@
     tools:context=".activity.ResidenceActivity"
     android:background="#F8FFFE">
 
-
-    <!-- Button section -->
-    <!--<LinearLayout
-        android:id="@+id/buttonContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">-->
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:orientation="vertical">-->
-
-    <!--<EditText
-            android:id="@+id/line2EditTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/mockUpText"
-            android:hint="Line 2"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/suburbEditTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/mockUpText"
-            android:hint="Suburb"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/stateEditTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/mockUpText"
-            android:hint="State"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/postCodeEditTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/mockUpText"
-            android:hint="PostCode"
-            android:textSize="25sp"
-            android:inputType="number"
-            android:textColor="@color/black"/>-->
-<!--
-    </LinearLayout>-->
     <LinearLayout
+        android:id="@+id/main_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:orientation="vertical">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/background_light" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/add" />
-
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/save" />
-    <!-- End of button section -->
-    <!--<LinearLayout
-        android:id="@+id/mainAddressContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        >
-
-    <LinearLayout
-        android:id="@+id/itemContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/residence_history"
-            android:textSize="25sp"
-            android:textColor="@android:color/tertiary_text_light"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/buttonContainer"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-            <Button
-                android:id="@+id/addButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="@string/add"
-                android:layout_margin="5dp"
-                />
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="@string/save"
-                android:layout_margin="5dp"
-                />
-        </LinearLayout>
-    </LinearLayout>-->
-</RelativeLayout>
+            android:layout_height="match_parent"
+            android:background="@android:color/background_light" />
+
+        <include layout="@layout/button_section"
+            android:id="@+id/button_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+</ScrollView>

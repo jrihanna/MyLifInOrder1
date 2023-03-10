@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.activity.adapter.LioAdapter;
 import com.example.mylifeinorder1.model.LioItem;
 
 import java.util.ArrayList;

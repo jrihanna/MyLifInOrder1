@@ -1,96 +1,91 @@
 package com.example.mylifeinorder1.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.activity.adapter.EmploymentAdapter;
+import com.example.mylifeinorder1.activity.adapter.ResidenceAdapter;
+import com.example.mylifeinorder1.model.Address;
 import com.example.mylifeinorder1.model.Employment;
 import com.example.mylifeinorder1.model.Residence;
+import com.example.mylifeinorder1.util.Constants;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmploymentActivity extends HistoryWithAddressActivity {
+public class EmploymentActivity extends AppCompatActivity {
+
+    List<Employment> employmentList;
+
+    private EmploymentAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mainContainerId = R.id.mainEmploymentContainer;
-        mainViewId = R.layout.activity_employment;
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_employment);
+
+        loadData();
+        buildRecyclerView();
+
+        setInsertButton();
+
+        Button buttonSave = findViewById(R.id.save_button);
+        buttonSave.setOnClickListener(v -> saveData());
     }
 
-    @Override
-    public LinearLayout createLayout() {
-
-        params.setMargins(10,0,0,0);
-
-        LinearLayout c = new LinearLayout(this);
-        c.setOrientation(LinearLayout.VERTICAL);
-
-        EditText companyName = new EditText(this);
-        companyName.setLayoutParams(params);
-        companyName.setHint("Company Name");
-
-        EditText role = new EditText(this);
-        role.setLayoutParams(params);
-        role.setHint("Role");
-
-        EditText companyEmail = new EditText(this);
-        companyEmail.setLayoutParams(params);
-        companyEmail.setHint("Company Email");
-        companyEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-
-        EditText companyPhone = new EditText(this);
-        companyPhone.setLayoutParams(params);
-        companyPhone.setHint("Company Phone");
-
-
-        c.addView(companyName);
-        c.addView(role);
-        c.addView(companyEmail);
-        c.addView(companyPhone);
-
-        LinearLayout companyAddress = super.createLayout();
-        c.addView(companyAddress);
-
-        return c;
+    private void setInsertButton() {
+        Button buttonInsert = findViewById(R.id.add_button);
+        buttonInsert.setOnClickListener(v -> {
+            insertItem();
+        });
     }
 
-    @Override
-    public void saveLayout() {
-        LinearLayout currentLayout = findViewById(R.id.itemContainer);
-        int childCount = currentLayout.getChildCount();
+    private void insertItem() {
+        employmentList.add(new Employment("", "", "", "", new Address()));
+        mAdapter.notifyItemInserted(employmentList.size());
+    }
 
-        List<Employment> employments = new ArrayList<>();
+    private void buildRecyclerView() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(false);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new EmploymentAdapter(employmentList);
 
-        // skip the buttons
-        for(int i = 0; i < childCount; i++) {
-            View v = currentLayout.getChildAt(i);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
 
-            if(v instanceof LinearLayout) {
-                LinearLayout employmentLayout = (LinearLayout) v;
-                Employment employment = new Employment();
-                employment.setName(getLayoutEditTextValue(employmentLayout, 0));
-                employment.setRole(getLayoutEditTextValue(employmentLayout, 1));
-                employment.setEmailAddress(getLayoutEditTextValue(employmentLayout, 2));
+    }
 
-                // TODO: format phone number
-                employment.setNumber(getLayoutEditTextValue(employmentLayout, 3));
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Constants.SHARED_PREFERENCE_EMPLOYMENT, null);
+        Type type = new TypeToken<ArrayList<Employment>>() {}.getType();
+        this.employmentList = gson.fromJson(json, type);
 
-                LinearLayout addressLayout = (LinearLayout) employmentLayout.getChildAt(4);
-                employment.setAddress(getAddress(addressLayout));
-
-                LinearLayout dates = (LinearLayout)(addressLayout).getChildAt(6);
-                employment.setFromDate(getDates(dates, 0));
-                employment.setToDate(getDates(dates, 1));
-
-                employments.add(employment);
-            }
+        if (this.employmentList == null) {
+            this.employmentList = new ArrayList<>();
         }
-
-        System.out.println(employments);
+    }
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(this.employmentList);
+        editor.putString(Constants.SHARED_PREFERENCE_EMPLOYMENT, json);
+        editor.apply();
     }
 }

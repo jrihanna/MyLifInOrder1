@@ -1,4 +1,4 @@
-package com.example.mylifeinorder1.activity;
+package com.example.mylifeinorder1.activity.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mylifeinorder1.R;
 import com.example.mylifeinorder1.model.LioItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LioAdapter extends RecyclerView.Adapter<LioAdapter.LioViewHolder> {

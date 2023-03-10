@@ -24,4 +24,13 @@
     <string name="from_date">From Date</string>
     <string name="to_date">To Date</string>
 
+    <!-- Contact Details -->
+    <string name="name">Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="email">Email address</string>
+
+
+    <!-- Employment -->
+    <string name="role">Role</string>
+
 </resources>
