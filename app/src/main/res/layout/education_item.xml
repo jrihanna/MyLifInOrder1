@@ -15,19 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/header_section"
+        android:background="@color/purple_300"
         >
         <TextView
             android:id="@+id/card_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:text="@string/mockUpText"
+            android:textColor="@color/white"
+            android:layout_marginTop="4dp"
             android:textStyle="bold"/>
         <ImageButton
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/cardview_light_background"
+            android:background="@null"
             android:layout_alignParentEnd="true"
             android:src="@drawable/trash_bin"
             android:padding="10dp"
@@ -36,14 +39,22 @@
     </RelativeLayout>
     <!-- Main info section -->
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:id="@+id/content_section"
+        android:visibility="visible">
+
+        <include layout="@layout/date_item"
+            android:id="@+id/date_panel_address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:id="@+id/content_section"
-            android:visibility="visible">
+            android:layout_height="wrap_content"/>
 
         <include layout="@layout/contact_details_item"
+            android:layout_below="@+id/date_panel_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/contact_section"/>
 
         <EditText
@@ -73,12 +84,6 @@
             android:layout_below="@id/grade_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <include layout="@layout/date_item"
-            android:id="@+id/date_panel_address"
-            android:layout_below="@+id/address_panel_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 
