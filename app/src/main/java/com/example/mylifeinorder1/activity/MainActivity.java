@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 case EDUCATION:
                     k = new Intent(MainActivity.this, EducationActivity.class);
                     break;
+                case INSURANCE:
+                    k = new Intent(MainActivity.this, InsuranceActivity.class);
+                    break;
                 default:
                     k = new Intent(MainActivity.this, ResidenceActivity.class);
             }

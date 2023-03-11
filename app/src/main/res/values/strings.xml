@@ -36,6 +36,26 @@
     <!-- Education -->
     <string name="field_of_study">Field of Study</string>
     <string name="grade">Grade</string>
+    <string name="insurance_type">Insurance Type</string>
+    <string name="payment_type">Payment per</string>
+    <string name="amount">Amount</string>
 
+    <!-- Insurance -->
+    <string-array name="payment_per">
+        <item>Week</item>
+        <item>Fortnight</item>
+        <item>Month</item>
+        <item>Quarter</item>
+        <item>6 Months</item>
+        <item>Annual</item>
+    </string-array>
+
+    <string-array name="insurance_type">
+        <item>Car</item>
+        <item>Building</item>
+        <item>Income</item>
+        <item>Investment Property</item>
+        <item>Life</item>
+    </string-array>
 
 </resources>

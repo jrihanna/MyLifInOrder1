@@ -1,44 +1,101 @@
 package com.example.mylifeinorder1.activity;
 
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.text.InputType;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-public class InsuranceActivity { // extends HistoryActivity
-    /*@Override
-    public LinearLayout createLayout() {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(10,0,0,0);
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-        LinearLayout c = new LinearLayout(this);
-        c.setOrientation(LinearLayout.VERTICAL);
+import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.activity.adapter.EmploymentAdapter;
+import com.example.mylifeinorder1.activity.adapter.InsuranceAdapter;
+import com.example.mylifeinorder1.model.Address;
+import com.example.mylifeinorder1.model.Employment;
+import com.example.mylifeinorder1.model.Insurance;
+import com.example.mylifeinorder1.util.Constants;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-        EditText insuranceType = new EditText(this);
-        insuranceType.setLayoutParams(params);
-        insuranceType.setHint("Insurance Type");
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
-        EditText instituteName = new EditText(this);
-        instituteName.setLayoutParams(params);
-        instituteName.setHint("By");
+public class InsuranceActivity extends HistoryActivity {
+    List<Insurance> insuranceList;
 
-        // TODO: change to drop down
-        EditText per = new EditText(this);
-        per.setLayoutParams(params);
-        per.setHint("Per");
+    private InsuranceAdapter mAdapter;
 
-        EditText amount = new EditText(this);
-        amount.setInputType(InputType.TYPE_CLASS_NUMBER);
-        amount.setLayoutParams(params);
-        amount.setHint("Amount");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_insurance);
 
-        c.addView(insuranceType);
-        c.addView(instituteName);
-        c.addView(per);
-        c.addView(amount);
+        loadData();
+        buildRecyclerView();
 
-        return c;
-    }*/
+        setInsertButton();
+
+        Button buttonSave = findViewById(R.id.save_button);
+        buttonSave.setOnClickListener(v -> saveData());
+    }
+
+    private void setInsertButton() {
+        Button buttonInsert = findViewById(R.id.add_button);
+        buttonInsert.setOnClickListener(v -> {
+            insertItem();
+        });
+    }
+
+    private void insertItem() {
+        insuranceList.add(new Insurance(0, "", 0, ""));
+        mAdapter.notifyItemInserted(insuranceList.size());
+    }
+
+    private void buildRecyclerView() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(false);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new InsuranceAdapter(insuranceList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnDeleteItemClickListener(position -> {
+            insuranceList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        });
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Constants.SHARED_PREFERENCE_INSURANCE, null);
+        Type type = new TypeToken<ArrayList<Insurance>>() {}.getType();
+        this.insuranceList = gson.fromJson(json, type);
+
+        if (this.insuranceList == null) {
+            this.insuranceList = new ArrayList<>();
+        }
+    }
+    private void saveData() {
+        if(this.insuranceList == null)
+            this.insuranceList = new ArrayList<>();
+
+        if(this.insuranceList.size() > 0 && !mAdapter.validate(findViewById(R.id.recyclerView)))
+            return;
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(this.insuranceList);
+        editor.putString(Constants.SHARED_PREFERENCE_INSURANCE, json);
+        editor.apply();
+
+        Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
+    }
 }

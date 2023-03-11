@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/item_header"
+            android:id="@+id/header_section" />
+
+        <!-- Main info section -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:id="@+id/content_section"
+            android:visibility="visible">
+
+            <include layout="@layout/date_item"
+                android:id="@+id/date_panel_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/company_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:text="@string/mockUpText"
+                android:hint="@string/name"
+                android:layout_below="@id/date_panel_address"
+                android:textColor="@color/black"/>
+
+            <Spinner
+                android:id="@+id/insurance_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:entries="@array/insurance_type"
+                android:hint="@string/insurance_type"
+                android:layout_below="@id/company_name_edit_text"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/insurance_type_spinner"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/insurance_type_spinner"
+                    android:layout_weight="2">
+
+                    <EditText
+                        android:id="@+id/amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:minHeight="50dp"
+                        android:inputType="numberDecimal"
+                        android:hint="@string/amount"
+                        />
+                    <Spinner
+                        android:id="@+id/payment_type_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:entries="@array/payment_per"
+                        android:hint="@string/payment_type"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- End of main info section -->
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
