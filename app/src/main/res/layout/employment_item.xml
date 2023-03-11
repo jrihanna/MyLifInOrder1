@@ -1,79 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F8FFFE">
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="4dp">
 
-    <!--<LinearLayout
-        android:id="@+id/mainAddressContainer"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="vertical"
-        >-->
+        android:orientation="vertical">
 
-    <!-- Title section -->
-    <!--<LinearLayout
-        android:id="@+id/itemContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/residence_history"
-            android:textSize="25sp"
-            android:textColor="@android:color/tertiary_text_light"
-            android:textStyle="bold"/>
-
-    </LinearLayout>-->
-    <!-- End of title section -->
-
-
-    <!-- Main info section -->
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="4dp">
-
-        <include layout="@layout/contact_details_item"
-            android:id="@+id/contact_section"/>
-
-        <EditText
-            android:id="@+id/role_edit_text"
+        <!-- Main info section -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:minHeight="50dp"
-            android:text="@string/mockUpText"
-            android:hint="@string/role"
-            android:layout_below="@id/contact_section"
-            android:textColor="@color/black"/>
+            android:id="@+id/header_section"
+            >
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="@string/mockUpText"
+                android:textStyle="bold"/>
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_light_background"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/trash_bin"
+                android:padding="10dp"
+                android:contentDescription="Delete Item"
+                />
+        </RelativeLayout>
 
-        <include layout="@layout/address_item"
-            android:id="@+id/address_panel_address"
-            android:layout_below="@id/role_edit_text"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:id="@+id/content_section"
+            android:visibility="visible">
 
-        <include layout="@layout/date_item"
-            android:id="@+id/date_panel_address"
-            android:layout_below="@+id/address_panel_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <include layout="@layout/contact_details_item"
+                android:id="@+id/contact_section"/>
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/role_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:text="@string/mockUpText"
+                android:hint="@string/role"
+                android:layout_below="@id/contact_section"
+                android:textColor="@color/black"/>
 
-    <!-- End of main info section -->
+            <include layout="@layout/address_item"
+                android:id="@+id/address_panel_address"
+                android:layout_below="@id/role_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
+            <include layout="@layout/date_item"
+                android:id="@+id/date_panel_address"
+                android:layout_below="@+id/address_panel_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-
-    <!--
-        </LinearLayout>-->
-</FrameLayout>
+        </RelativeLayout>
+        <!-- End of main info section -->
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

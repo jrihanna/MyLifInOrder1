@@ -3,10 +3,14 @@ package com.example.mylifeinorder1.activity.adapter;
 import static com.example.mylifeinorder1.util.ViewUtil.getLayoutEditTextValue;
 import static com.example.mylifeinorder1.util.ViewUtil.showDateOnSelect;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +26,15 @@ import java.util.List;
 public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.EducationViewHolder> {
 
     private List<Education> educationList;
+
+    private EducationAdapter.OnDeleteItemClickListener mDeleteListener;
+
+    public interface OnDeleteItemClickListener {
+        void onItemClick(int position);
+    }
+    public void setOnDeleteItemClickListener(EducationAdapter.OnDeleteItemClickListener listener) {
+        mDeleteListener = listener;
+    }
 
     public static class EducationViewHolder extends RecyclerView.ViewHolder {
 
@@ -43,7 +56,15 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
 
         public EditText emailEditText;
 
-        public EducationViewHolder(@NonNull View itemView) {
+        public RelativeLayout contentSection;
+        public RelativeLayout headerSection;
+
+        public TextView cardTitle;
+
+        public ImageButton deleteButton;
+
+
+        public EducationViewHolder(@NonNull View itemView, EducationAdapter.OnDeleteItemClickListener listener) {
             super(itemView);
             countryEditText = itemView.findViewById(R.id.country_edit_text);
             line2EditText = itemView.findViewById(R.id.line2_edit_text);
@@ -59,8 +80,22 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
             phoneEditText = itemView.findViewById(R.id.phone_edit_text);
             emailEditText = itemView.findViewById(R.id.email_edit_text);
 
+            contentSection = itemView.findViewById(R.id.content_section);
+            headerSection = itemView.findViewById(R.id.header_section);
+            cardTitle = itemView.findViewById(R.id.card_title);
+            deleteButton = itemView.findViewById(R.id.delete_button);
+
             showDateOnSelect(fromDateEditText, itemView.getContext());
             showDateOnSelect(toDateEditText, itemView.getContext());
+
+            deleteButton.setOnClickListener(view -> {
+                if(listener != null) {
+                    int position = getAbsoluteAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 
@@ -72,7 +107,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
     @Override
     public EducationAdapter.EducationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.education_item, parent, false);
-        EducationAdapter.EducationViewHolder rvh = new EducationAdapter.EducationViewHolder(v);
+        EducationAdapter.EducationViewHolder rvh = new EducationAdapter.EducationViewHolder(v, mDeleteListener);
         return rvh;
     }
 
@@ -103,8 +138,8 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
         holder.suburbEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setSuburb(getLayoutEditTextValue(holder.suburbEditText)));
         holder.stateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setState(getLayoutEditTextValue(holder.stateEditText)));
         holder.postCodeEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setPostCode(getLayoutEditTextValue(holder.postCodeEditText)));
-        holder.fromDateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setFromDate(ViewUtil.getDate(holder.fromDateEditText)));
-        holder.toDateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setToDate(ViewUtil.getDate(holder.toDateEditText)));
+        holder.fromDateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setFromDate(getLayoutEditTextValue(holder.fromDateEditText)));
+        holder.toDateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setToDate(getLayoutEditTextValue(holder.toDateEditText)));
 
         holder.nameEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setName(getLayoutEditTextValue(holder.nameEditText)));
         holder.fieldOfStudyEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setFieldOfStudy(getLayoutEditTextValue(holder.fieldOfStudyEditText)));
@@ -112,10 +147,68 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
         holder.phoneEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setNumber(getLayoutEditTextValue(holder.phoneEditText)));
         holder.emailEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setEmailAddress(getLayoutEditTextValue(holder.emailEditText)));
 
+        holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
+
+        holder.fromDateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> {
+            currentItem.setFromDate(getLayoutEditTextValue(charSequence.toString()));
+            holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
+        });
+        holder.toDateEditText.addTextChangedListener(
+                (CustomTextWatcher) (charSequence, i, i1, i2) -> {
+                    currentItem.setToDate(getLayoutEditTextValue(charSequence.toString()));
+                    holder.cardTitle.setText(holder.toDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
+                });
+
+        holder.headerSection.setOnClickListener(v -> {
+            int currentVisibility = holder.contentSection.getVisibility();
+            holder.contentSection.setVisibility(currentVisibility == View.VISIBLE ? View.GONE : View.VISIBLE);
+        });
     }
 
     @Override
     public int getItemCount() {
         return educationList.size();
+    }
+
+    public boolean validate(View v) {
+        boolean isValid = true;
+        EditText countryEditText = v.findViewById(R.id.country_edit_text);
+        EditText streetEditText = v.findViewById(R.id.street_edit_text);
+        EditText stateEditText = v.findViewById(R.id.state_edit_text);
+        EditText suburbEditText = v.findViewById(R.id.suburb_edit_text);
+        EditText postCodeEditText = v.findViewById(R.id.post_code_edit_text);
+        EditText fromDateEditText = v.findViewById(R.id.from_date_view);
+
+        if(TextUtils.isEmpty(countryEditText.getText())){
+            countryEditText.setError("This field is required");
+            isValid = false;
+        }
+
+        if(TextUtils.isEmpty(streetEditText.getText())){
+            streetEditText.setError("This field is required");
+            isValid = false;
+        }
+
+        if(TextUtils.isEmpty(stateEditText.getText())){
+            stateEditText.setError("This field is required");
+            isValid = false;
+        }
+
+        if(TextUtils.isEmpty(suburbEditText.getText())){
+            suburbEditText.setError("This field is required");
+            isValid = false;
+        }
+
+        if(TextUtils.isEmpty(postCodeEditText.getText())){
+            postCodeEditText.setError("This field is required");
+            isValid = false;
+        }
+
+        if(TextUtils.isEmpty(fromDateEditText.getText())){
+            fromDateEditText.setError("This field is required");
+            isValid = false;
+        }
+
+        return isValid;
     }
 }

@@ -29,6 +29,7 @@
                 app:title="@string/residence_history"
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:titleTextColor="@color/design_default_color_on_primary" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView

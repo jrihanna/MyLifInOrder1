@@ -5,24 +5,24 @@ import java.util.Date;
 
 public abstract class History {
 
-    protected LocalDate fromDate;
-    protected LocalDate toDate;
+    protected String fromDate;
+    protected String toDate;
     protected boolean current;
     protected String name;
 
-    public LocalDate getFromDate() {
+    public String getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDate fromDate) {
+    public void setFromDate(String fromDate) {
         this.fromDate = fromDate;
     }
 
-    public LocalDate getToDate() {
+    public String getToDate() {
         return toDate;
     }
 
-    public void setToDate(LocalDate toDate) {
+    public void setToDate(String toDate) {
         this.toDate = toDate;
     }
 

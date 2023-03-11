@@ -38,15 +38,12 @@ public class LioAdapter extends RecyclerView.Adapter<LioAdapter.LioViewHolder> {
             imageView = itemView.findViewById(R.id.lioImageView);
             textView = itemView.findViewById(R.id.lioTextView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(listener != null) {
-                        int position = getAbsoluteAdapterPosition();
+            itemView.setOnClickListener(view -> {
+                if(listener != null) {
+                    int position = getAbsoluteAdapterPosition();
 
-                        if(position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
+                    if(position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
                     }
                 }
             });

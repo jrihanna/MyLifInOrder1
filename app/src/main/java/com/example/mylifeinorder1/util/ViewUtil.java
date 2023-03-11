@@ -24,9 +24,16 @@ public class ViewUtil {
         return t.getText() == null ? "" : t.getText().toString().trim();
     }
 
+    public static String getLayoutEditTextValue(String t) {
+        return t == null ? "" : t.trim();
+    }
+
     public static LocalDate getDate(EditText t) {
 
         String date = getLayoutEditTextValue(t);
+        return getDate(date);
+    }
+    public static LocalDate getDate(String date) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
@@ -37,7 +44,6 @@ public class ViewUtil {
 
         return null;
     }
-
     public static void showDateOnSelect(EditText dateView, Context context) {
         Calendar myCalendar= Calendar.getInstance();
         DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {

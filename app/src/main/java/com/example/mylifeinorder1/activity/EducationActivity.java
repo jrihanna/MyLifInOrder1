@@ -64,6 +64,10 @@ public class EducationActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        mAdapter.setOnDeleteItemClickListener(position -> {
+            educationList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        });
     }
 
     private void loadData() {
@@ -77,7 +81,14 @@ public class EducationActivity extends AppCompatActivity {
             this.educationList = new ArrayList<>();
         }
     }
+
     private void saveData() {
+        if(this.educationList == null)
+            this.educationList = new ArrayList<>();
+
+        if(this.educationList.size() > 0 && !mAdapter.validate(findViewById(R.id.recyclerView)))
+            return;
+
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.activity.adapter.LioAdapter;
 import com.example.mylifeinorder1.activity.adapter.ResidenceAdapter;
 import com.example.mylifeinorder1.model.Address;
 import com.example.mylifeinorder1.model.History;
@@ -75,6 +76,10 @@ public class ResidenceActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        mAdapter.setOnDeleteItemClickListener(position -> {
+            residenceList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        });
     }
 
     private void loadData() {
@@ -90,6 +95,12 @@ public class ResidenceActivity extends AppCompatActivity {
     }
 
     private void saveData() {
+        if(this.residenceList == null)
+            this.residenceList = new ArrayList<>();
+
+        if(this.residenceList.size() > 0 && !mAdapter.validate(findViewById(R.id.recyclerView)))
+            return;
+
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -97,5 +108,6 @@ public class ResidenceActivity extends AppCompatActivity {
         editor.putString(Constants.SHARED_PREFERENCE_ADDRESS, json);
         editor.apply();
     }
+
 
 }
