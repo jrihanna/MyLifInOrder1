@@ -51,37 +51,11 @@
                 android:layout_below="@id/company_name_edit_text"
                 android:textColor="@color/black"/>
 
-            <LinearLayout
+            <include layout="@layout/payment_type_item"
+                android:id="@+id/payment_type_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/insurance_type_spinner"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/insurance_type_spinner"
-                    android:layout_weight="2">
-
-                    <EditText
-                        android:id="@+id/amount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:minHeight="50dp"
-                        android:inputType="numberDecimal"
-                        android:hint="@string/amount"
-                        />
-                    <Spinner
-                        android:id="@+id/payment_type_spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="50dp"
-                        android:entries="@array/payment_per"
-                        android:hint="@string/payment_type"
-                        android:textColor="@color/black"
-                        android:layout_weight="1"/>
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_below="@+id/insurance_type_spinner" />
 
         </RelativeLayout>
         <!-- End of main info section -->
