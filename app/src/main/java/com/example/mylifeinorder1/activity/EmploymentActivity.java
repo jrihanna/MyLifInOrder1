@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -97,5 +98,7 @@ public class EmploymentActivity extends AppCompatActivity {
         String json = gson.toJson(this.employmentList);
         editor.putString(Constants.SHARED_PREFERENCE_EMPLOYMENT, json);
         editor.apply();
+
+        Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
     }
 }
