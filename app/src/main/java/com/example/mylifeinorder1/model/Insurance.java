@@ -1,14 +1,16 @@
 package com.example.mylifeinorder1.model;
 
+import java.math.BigDecimal;
+
 public class Insurance extends History {
     private int insuranceType;
     private String insuranceCompany;
     private int per; // Week, Month, Year
-    private String amount;
+    private BigDecimal amount;
 
     public Insurance() {}
 
-    public Insurance(int insuranceType, String insuranceCompany, int per, String amount) {
+    public Insurance(int insuranceType, String insuranceCompany, int per, BigDecimal amount) {
         this.insuranceType = insuranceType;
         this.insuranceCompany = insuranceCompany;
         this.per = per;
@@ -39,11 +41,11 @@ public class Insurance extends History {
         this.per = per;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

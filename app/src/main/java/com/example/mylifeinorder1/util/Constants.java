@@ -7,4 +7,6 @@ public class Constants {
     public static final String SHARED_PREFERENCE_EMPLOYMENT = "employment list";
     public static final String SHARED_PREFERENCE_EDUCATION = "education list";
     public static final String SHARED_PREFERENCE_INSURANCE = "insurance list";
+
+    public static final String SHARED_PREFERENCE_LOAN = "loan list";
 }

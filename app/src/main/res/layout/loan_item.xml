@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="4dp"
+    android:layout_marginBottom="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/item_header"
+            android:id="@+id/header_section" />
+
+        <!-- Main info section -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:id="@+id/content_section"
+            android:visibility="visible">
+
+            <include layout="@layout/date_item"
+                android:id="@+id/date_panel_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/company_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:text="@string/mockUpText"
+                android:hint="@string/loan_institue"
+                android:layout_below="@id/date_panel_address"
+                android:textColor="@color/black"/>
+
+            <Spinner
+                android:id="@+id/loan_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:entries="@array/loan_type"
+                android:hint="@string/loan_type"
+                android:layout_below="@id/company_name_edit_text"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/amount_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:text="@string/mockUpText"
+                android:hint="@string/repayment_amount"
+                android:layout_below="@id/loan_type_spinner"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/repayment_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repayment"
+                android:layout_marginTop="25dp"
+                android:layout_below="@id/amount_edit_text" />
+
+            <EditText
+                android:id="@+id/repayment_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:minHeight="50dp"
+                android:text="@string/mockUpText"
+                android:hint="@string/repayment_amount"
+                android:layout_below="@id/repayment_title"
+                android:textColor="@color/black"/>
+
+            <include layout="@layout/payment_type_item"
+                android:id="@+id/payment_type_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/repayment_edit_text" />
+
+        </RelativeLayout>
+        <!-- End of main info section -->
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

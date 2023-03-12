@@ -39,6 +39,10 @@
     <string name="insurance_type">Insurance Type</string>
     <string name="payment_type">Payment per</string>
     <string name="amount">Amount</string>
+    <string name="loan_type">Loan Type</string>
+    <string name="loan_institue">Lender</string>
+    <string name="repayment">Repayment</string>
+    <string name="repayment_amount">Repayment Amount</string>
 
     <!-- Insurance -->
     <string-array name="payment_per">
@@ -56,6 +60,12 @@
         <item>Income</item>
         <item>Investment Property</item>
         <item>Life</item>
+    </string-array>
+
+    <string-array name="loan_type">
+        <item>Car</item>
+        <item>Home</item>
+        <item>Personal</item>
     </string-array>
 
 </resources>

@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class InsuranceActivity extends HistoryActivity {
     }
 
     private void insertItem() {
-        insuranceList.add(new Insurance(0, "", 0, ""));
+        insuranceList.add(new Insurance(0, "", 0, BigDecimal.ZERO));
         mAdapter.notifyItemInserted(insuranceList.size());
     }
 

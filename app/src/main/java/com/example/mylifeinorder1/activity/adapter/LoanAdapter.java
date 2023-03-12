@@ -3,13 +3,10 @@ package com.example.mylifeinorder1.activity.adapter;
 import static com.example.mylifeinorder1.util.ViewUtil.getLayoutEditTextValue;
 import static com.example.mylifeinorder1.util.ViewUtil.showDateOnSelect;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -20,46 +17,42 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mylifeinorder1.R;
-import com.example.mylifeinorder1.model.Employment;
-import com.example.mylifeinorder1.model.Insurance;
-import com.example.mylifeinorder1.model.enums.InsuranceType;
+import com.example.mylifeinorder1.model.Loan;
+import com.example.mylifeinorder1.model.enums.LoanType;
 import com.example.mylifeinorder1.model.enums.PaymentPer;
 import com.example.mylifeinorder1.util.CustomTextWatcher;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.InsuranceViewHolder> {
+public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder> {
 
-    List<Insurance> insuranceList;
+    List<Loan> loanList;
 
-    private InsuranceAdapter.OnDeleteItemClickListener mDeleteListener;
+    private LoanAdapter.OnDeleteItemClickListener mDeleteListener;
 
     public interface OnDeleteItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnDeleteItemClickListener(InsuranceAdapter.OnDeleteItemClickListener listener) {
+    public void setOnDeleteItemClickListener(LoanAdapter.OnDeleteItemClickListener listener) {
         mDeleteListener = listener;
     }
 
-    public static class InsuranceViewHolder extends RecyclerView.ViewHolder {
-
+    public static class LoanViewHolder extends RecyclerView.ViewHolder {
         public EditText fromDateEditText;
 
         public EditText toDateEditText;
 
-        public EditText companyNameEditText;
+        public EditText loanInstituteNameEditText;
 
         public EditText amount;
 
-        public Spinner insuranceType;
+        public EditText repaymentAmount;
 
         public Spinner paymentType;
 
-//        public EditText phoneEditText;
-//
-//        public EditText emailEditText;
+        public Spinner loanType;
 
         public RelativeLayout contentSection;
 
@@ -69,14 +62,15 @@ public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.Insu
 
         public ImageButton deleteButton;
 
-        public InsuranceViewHolder(@NonNull View itemView, InsuranceAdapter.OnDeleteItemClickListener listener) {
+        public LoanViewHolder(@NonNull View itemView, LoanAdapter.OnDeleteItemClickListener listener) {
             super(itemView);
             fromDateEditText = itemView.findViewById(R.id.from_date_view);
             toDateEditText = itemView.findViewById(R.id.to_date_view);
-            companyNameEditText = itemView.findViewById(R.id.company_name_edit_text);
+            loanInstituteNameEditText = itemView.findViewById(R.id.company_name_edit_text);
 
-            insuranceType = itemView.findViewById(R.id.insurance_type_spinner);
-            amount = itemView.findViewById(R.id.amount);
+            loanType = itemView.findViewById(R.id.loan_type_spinner);
+            amount = itemView.findViewById(R.id.amount_edit_text);
+            repaymentAmount = itemView.findViewById(R.id.repayment_edit_text);
 
             paymentType = itemView.findViewById(R.id.payment_type_spinner);
 
@@ -103,25 +97,25 @@ public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.Insu
         }
     }
 
-    public InsuranceAdapter(List<Insurance> insuranceList) {
-        this.insuranceList = insuranceList;
+    public LoanAdapter(List<Loan> loanList) {
+        this.loanList = loanList;
     }
 
     @NonNull
     @Override
-    public InsuranceAdapter.InsuranceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.insurance_item, parent, false);
-        InsuranceAdapter.InsuranceViewHolder rvh = new InsuranceAdapter.InsuranceViewHolder(v, mDeleteListener);
+    public LoanAdapter.LoanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.loan_item, parent, false);
+        LoanAdapter.LoanViewHolder rvh = new LoanAdapter.LoanViewHolder(v, mDeleteListener);
         return rvh;
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull InsuranceAdapter.InsuranceViewHolder holder, int position) {
-        Insurance currentItem = insuranceList.get(position);
 
-        holder.companyNameEditText.setText(currentItem.getName());
-//        holder.phoneEditText.setText(currentItem.getNumber());
-//        holder.emailEditText.setText(currentItem.getEmailAddress());
+    @Override
+    public void onBindViewHolder(@NonNull LoanAdapter.LoanViewHolder holder, int position) {
+        Loan currentItem = loanList.get(position);
+
+        holder.loanInstituteNameEditText.setText(currentItem.getName());
+        holder.loanInstituteNameEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setName(getLayoutEditTextValue(holder.loanInstituteNameEditText)));
 
         holder.fromDateEditText.setText(currentItem.getFromDate() == null ? "" : currentItem.getFromDate());
         holder.toDateEditText.setText(currentItem.getToDate() == null ? "" : currentItem.getToDate());
@@ -131,12 +125,11 @@ public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.Insu
 
         holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
 
-        holder.amount.setText(currentItem.getAmount().toString());
-        holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setAmount(new BigDecimal(getLayoutEditTextValue(holder.amount))));
+        holder.amount.setText(currentItem.getInitialAmount().toString());
+        holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setInitialAmount(new BigDecimal(getLayoutEditTextValue(holder.amount))));
 
-        holder.companyNameEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setName(getLayoutEditTextValue(holder.companyNameEditText)));
-//        holder.phoneEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setNumber(getLayoutEditTextValue(holder.phoneEditText)));
-//        holder.emailEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setEmailAddress(getLayoutEditTextValue(holder.emailEditText)));
+        holder.repaymentAmount.setText(currentItem.getRepaymentAmount().toString());
+        holder.repaymentAmount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setRepaymentAmount(new BigDecimal(getLayoutEditTextValue(holder.repaymentAmount))));
 
         holder.headerSection.setOnClickListener(v -> {
             int currentVisibility = holder.contentSection.getVisibility();
@@ -153,30 +146,30 @@ public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.Insu
                     holder.cardTitle.setText(holder.toDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
                 });
 
-        holder.insuranceType.setSelection(InsuranceType.getIndex(currentItem.getInsuranceType()));
+        holder.loanType.setSelection(LoanType.getIndex(currentItem.getLoanType()));
         holder.paymentType.setSelection(PaymentPer.getIndex(currentItem.getPer()));
-        holder.insuranceType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        holder.loanType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                currentItem.setInsuranceType(adapterView.getSelectedItemPosition());
+                currentItem.setLoanType(adapterView.getSelectedItemPosition());
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
         holder.paymentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    currentItem.setPer(adapterView.getSelectedItemPosition());
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {}
-            });
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                currentItem.setPer(adapterView.getSelectedItemPosition());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
     }
 
     @Override
     public int getItemCount() {
-        return insuranceList.size();
+        return loanList.size();
     }
 
     public boolean validate(View v) {
