@@ -7,13 +7,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <!--<EditText
             android:id="@+id/country_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:minHeight="50dp"
             android:text="@string/mockUpText"
+            android:hint="@string/country"
+            android:textColor="@color/black"/>-->
+
+        <Spinner
+            android:id="@+id/country_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="50dp"
+            android:entries="@array/countries"
             android:hint="@string/country"
             android:textColor="@color/black"/>
 

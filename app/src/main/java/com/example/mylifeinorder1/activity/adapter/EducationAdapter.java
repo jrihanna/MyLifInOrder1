@@ -7,9 +7,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +40,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
 
     public static class EducationViewHolder extends RecyclerView.ViewHolder {
 
-        public EditText countryEditText;
+        public Spinner countrySpinner;
         public EditText streetEditText;
         public EditText line2EditText;
         public EditText suburbEditText;
@@ -66,7 +68,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
 
         public EducationViewHolder(@NonNull View itemView, EducationAdapter.OnDeleteItemClickListener listener) {
             super(itemView);
-            countryEditText = itemView.findViewById(R.id.country_edit_text);
+            countrySpinner = itemView.findViewById(R.id.country_edit_text);
             line2EditText = itemView.findViewById(R.id.line2_edit_text);
             streetEditText = itemView.findViewById(R.id.street_edit_text);
             stateEditText = itemView.findViewById(R.id.state_edit_text);
@@ -115,7 +117,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
     public void onBindViewHolder(@NonNull EducationAdapter.EducationViewHolder holder, int position) {
         Education currentItem = educationList.get(position);
 
-        holder.countryEditText.setText(currentItem.getAddress().getCountry());
+        holder.countrySpinner.setSelection(currentItem.getAddress().getCountry() == null ? 0 : Integer.valueOf(currentItem.getAddress().getCountry()));
         holder.streetEditText.setText(currentItem.getAddress().getStreet());
         holder.line2EditText.setText(currentItem.getAddress().getLine2());
         holder.suburbEditText.setText(currentItem.getAddress().getSuburb());
@@ -132,7 +134,7 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
         holder.fromDateEditText.setText(currentItem.getFromDate() == null ? "" : currentItem.getFromDate().toString());
         holder.toDateEditText.setText(currentItem.getToDate() == null ? "" : currentItem.getToDate().toString());
 
-        holder.countryEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setCountry(getLayoutEditTextValue(holder.countryEditText)));
+//        holder.countryEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setCountry(getLayoutEditTextValue(holder.countryEditText)));
         holder.streetEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setStreet(getLayoutEditTextValue(holder.streetEditText)));
         holder.line2EditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setLine2(getLayoutEditTextValue(holder.line2EditText)));
         holder.suburbEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setSuburb(getLayoutEditTextValue(holder.suburbEditText)));
@@ -148,6 +150,15 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
         holder.emailEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setEmailAddress(getLayoutEditTextValue(holder.emailEditText)));
 
         holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
+
+        holder.countrySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                currentItem.getAddress().setCountry(String.valueOf(adapterView.getSelectedItemPosition()));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
 
         holder.fromDateEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> {
             currentItem.setFromDate(getLayoutEditTextValue(charSequence.toString()));
@@ -172,17 +183,17 @@ public class EducationAdapter extends RecyclerView.Adapter<EducationAdapter.Educ
 
     public boolean validate(View v) {
         boolean isValid = true;
-        EditText countryEditText = v.findViewById(R.id.country_edit_text);
+//        EditText countryEditText = v.findViewById(R.id.country_edit_text);
         EditText streetEditText = v.findViewById(R.id.street_edit_text);
         EditText stateEditText = v.findViewById(R.id.state_edit_text);
         EditText suburbEditText = v.findViewById(R.id.suburb_edit_text);
         EditText postCodeEditText = v.findViewById(R.id.post_code_edit_text);
         EditText fromDateEditText = v.findViewById(R.id.from_date_view);
 
-        if(TextUtils.isEmpty(countryEditText.getText())){
-            countryEditText.setError("This field is required");
-            isValid = false;
-        }
+//        if(TextUtils.isEmpty(countryEditText.getText())){
+//            countryEditText.setError("This field is required");
+//            isValid = false;
+//        }
 
         if(TextUtils.isEmpty(streetEditText.getText())){
             streetEditText.setError("This field is required");

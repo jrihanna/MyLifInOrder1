@@ -52,7 +52,7 @@ public class LoanActivity extends HistoryActivity {
     }
 
     private void insertItem() {
-        loanList.add(new Loan(0, "", BigDecimal.ZERO, BigDecimal.ZERO, 0));
+        loanList.add(new Loan(0, "", null, BigDecimal.ZERO, 0));
         mAdapter.notifyItemInserted(loanList.size());
     }
 

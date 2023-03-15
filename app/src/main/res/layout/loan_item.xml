@@ -57,7 +57,7 @@
                 android:layout_marginTop="12dp"
                 android:minHeight="50dp"
                 android:text="@string/mockUpText"
-                android:hint="@string/repayment_amount"
+                android:hint="@string/initial_amount"
                 android:layout_below="@id/loan_type_spinner"
                 android:textColor="@color/black"/>
 
@@ -69,22 +69,11 @@
                 android:layout_marginTop="25dp"
                 android:layout_below="@id/amount_edit_text" />
 
-            <EditText
-                android:id="@+id/repayment_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:minHeight="50dp"
-                android:text="@string/mockUpText"
-                android:hint="@string/repayment_amount"
-                android:layout_below="@id/repayment_title"
-                android:textColor="@color/black"/>
-
             <include layout="@layout/payment_type_item"
                 android:id="@+id/payment_type_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/repayment_edit_text" />
+                android:layout_below="@+id/repayment_title" />
 
         </RelativeLayout>
         <!-- End of main info section -->

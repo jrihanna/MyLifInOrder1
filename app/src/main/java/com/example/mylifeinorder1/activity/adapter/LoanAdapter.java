@@ -70,7 +70,7 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
 
             loanType = itemView.findViewById(R.id.loan_type_spinner);
             amount = itemView.findViewById(R.id.amount_edit_text);
-            repaymentAmount = itemView.findViewById(R.id.repayment_edit_text);
+            repaymentAmount = itemView.findViewById(R.id.amount);
 
             paymentType = itemView.findViewById(R.id.payment_type_spinner);
 
@@ -125,7 +125,7 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
 
         holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
 
-        holder.amount.setText(currentItem.getInitialAmount().toString());
+        holder.amount.setText(currentItem.getInitialAmount() == null ? "" : currentItem.getInitialAmount().toString());
         holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setInitialAmount(new BigDecimal(getLayoutEditTextValue(holder.amount))));
 
         holder.repaymentAmount.setText(currentItem.getRepaymentAmount().toString());
