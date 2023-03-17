@@ -27,11 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <include layout="@layout/contact_details_item"
-            android:layout_below="@+id/date_panel_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contact_section"/>
 
         <EditText
             android:id="@+id/field_study_edit_text"
@@ -41,7 +36,7 @@
             android:minHeight="50dp"
             android:text="@string/mockUpText"
             android:hint="@string/field_of_study"
-            android:layout_below="@id/contact_section"
+            android:layout_below="@id/date_panel_address"
             android:textColor="@color/black"/>
 
         <EditText
@@ -55,9 +50,15 @@
             android:layout_below="@id/field_study_edit_text"
             android:textColor="@color/black"/>
 
+        <include layout="@layout/contact_details_item"
+            android:layout_below="@+id/grade_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contact_section"/>
+
         <include layout="@layout/address_item"
             android:id="@+id/address_panel_address"
-            android:layout_below="@id/grade_edit_text"
+            android:layout_below="@id/contact_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
