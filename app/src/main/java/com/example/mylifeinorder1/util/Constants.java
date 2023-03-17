@@ -9,4 +9,5 @@ public class Constants {
     public static final String SHARED_PREFERENCE_INSURANCE = "insurance list";
 
     public static final String SHARED_PREFERENCE_LOAN = "loan list";
+    public static final String SHARED_PREFERENCE_SUBSCRIPTION = "subscription list";
 }

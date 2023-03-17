@@ -76,7 +76,7 @@ public class SubscriptionActivity extends AppCompatActivity {
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString(Constants.SHARED_PREFERENCE_EDUCATION, null);
+        String json = sharedPreferences.getString(Constants.SHARED_PREFERENCE_SUBSCRIPTION, null);
         Type type = new TypeToken<ArrayList<Employment>>() {}.getType();
         this.subscriptionList = gson.fromJson(json, type);
 
@@ -96,7 +96,7 @@ public class SubscriptionActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(this.subscriptionList);
-        editor.putString(Constants.SHARED_PREFERENCE_EDUCATION, json);
+        editor.putString(Constants.SHARED_PREFERENCE_SUBSCRIPTION, json);
         editor.apply();
 
         Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
