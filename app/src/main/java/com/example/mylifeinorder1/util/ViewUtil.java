@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.example.mylifeinorder1.R;
 import com.example.mylifeinorder1.activity.MainActivity;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,6 +34,12 @@ public class ViewUtil {
         String date = getLayoutEditTextValue(t);
         return getDate(date);
     }
+
+    public static BigDecimal getLayoutEditTextValueToBigDecimal(String t) {
+        return t == null ? BigDecimal.ZERO :
+                t.trim().length() == 0 ? BigDecimal.ZERO : new BigDecimal(t.trim());
+    }
+
     public static LocalDate getDate(String date) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -44,6 +51,7 @@ public class ViewUtil {
 
         return null;
     }
+
     public static void showDateOnSelect(EditText dateView, Context context) {
         Calendar myCalendar= Calendar.getInstance();
         DatePickerDialog.OnDateSetListener date = (view, year, month, day) -> {

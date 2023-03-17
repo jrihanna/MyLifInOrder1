@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mylifeinorder1.R;
 import com.example.mylifeinorder1.model.Loan;
+import com.example.mylifeinorder1.model.Subscription;
 import com.example.mylifeinorder1.model.enums.LoanType;
 import com.example.mylifeinorder1.model.enums.PaymentPer;
 import com.example.mylifeinorder1.util.CustomTextWatcher;
@@ -26,34 +27,30 @@ import com.example.mylifeinorder1.util.CustomTextWatcher;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder> {
+public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapter.SubscriptionViewHolder> {
 
-    List<Loan> loanList;
+    List<Subscription> subscriptionList;
 
-    private LoanAdapter.OnDeleteItemClickListener mDeleteListener;
+    private SubscriptionAdapter.OnDeleteItemClickListener mDeleteListener;
 
     public interface OnDeleteItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnDeleteItemClickListener(LoanAdapter.OnDeleteItemClickListener listener) {
+    public void setOnDeleteItemClickListener(SubscriptionAdapter.OnDeleteItemClickListener listener) {
         mDeleteListener = listener;
     }
 
-    public static class LoanViewHolder extends RecyclerView.ViewHolder {
+    public static class SubscriptionViewHolder extends RecyclerView.ViewHolder {
         public EditText fromDateEditText;
 
         public EditText toDateEditText;
 
-        public EditText loanInstituteNameEditText;
+        public EditText subscriberNameEditText;
 
         public EditText amount;
 
-        public EditText repaymentAmount;
-
         public Spinner paymentType;
-
-        public Spinner loanType;
 
         public RelativeLayout contentSection;
 
@@ -63,20 +60,15 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
 
         public ImageButton deleteButton;
 
-        public LoanViewHolder(@NonNull View itemView, LoanAdapter.OnDeleteItemClickListener listener) {
+        public SubscriptionViewHolder(@NonNull View itemView, SubscriptionAdapter.OnDeleteItemClickListener listener) {
             super(itemView);
+            
             fromDateEditText = itemView.findViewById(R.id.from_date_view);
             toDateEditText = itemView.findViewById(R.id.to_date_view);
-            loanInstituteNameEditText = itemView.findViewById(R.id.company_name_edit_text);
-
-            loanType = itemView.findViewById(R.id.loan_type_spinner);
-            amount = itemView.findViewById(R.id.amount_edit_text);
-            repaymentAmount = itemView.findViewById(R.id.amount);
+            subscriberNameEditText = itemView.findViewById(R.id.subscriber_name_edit_text);
+            amount = itemView.findViewById(R.id.amount);
 
             paymentType = itemView.findViewById(R.id.payment_type_spinner);
-
-//            phoneEditText = itemView.findViewById(R.id.phone_edit_text);
-//            emailEditText = itemView.findViewById(R.id.email_edit_text);
 
             contentSection = itemView.findViewById(R.id.content_section);
             headerSection = itemView.findViewById(R.id.header_section);
@@ -94,29 +86,28 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
                     }
                 }
             });
-
         }
     }
 
-    public LoanAdapter(List<Loan> loanList) {
-        this.loanList = loanList;
+    public SubscriptionAdapter(List<Subscription> subscriptionList) {
+        this.subscriptionList = subscriptionList;
     }
 
     @NonNull
     @Override
-    public LoanAdapter.LoanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.loan_item, parent, false);
-        LoanAdapter.LoanViewHolder rvh = new LoanAdapter.LoanViewHolder(v, mDeleteListener);
+    public SubscriptionAdapter.SubscriptionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.subscription_item, parent, false);
+        SubscriptionAdapter.SubscriptionViewHolder rvh = new SubscriptionAdapter.SubscriptionViewHolder(v, mDeleteListener);
         return rvh;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull LoanAdapter.LoanViewHolder holder, int position) {
-        Loan currentItem = loanList.get(position);
+    public void onBindViewHolder(@NonNull SubscriptionAdapter.SubscriptionViewHolder holder, int position) {
+        Subscription currentItem = subscriptionList.get(position);
 
-        holder.loanInstituteNameEditText.setText(currentItem.getName());
-        holder.loanInstituteNameEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setName(getLayoutEditTextValue(holder.loanInstituteNameEditText)));
+        holder.subscriberNameEditText.setText(currentItem.getName());
+        holder.subscriberNameEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setName(getLayoutEditTextValue(holder.subscriberNameEditText)));
 
         holder.fromDateEditText.setText(currentItem.getFromDate() == null ? "" : currentItem.getFromDate());
         holder.toDateEditText.setText(currentItem.getToDate() == null ? "" : currentItem.getToDate());
@@ -126,11 +117,9 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
 
         holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
 
-        holder.amount.setText(currentItem.getInitialAmount().toString());
-        holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setInitialAmount(getLayoutEditTextValueToBigDecimal(charSequence.toString())));
+        holder.amount.setText(currentItem.getAmount() == null ? "" : currentItem.getAmount().toString());
+        holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setAmount(getLayoutEditTextValueToBigDecimal(charSequence.toString())));
 
-        holder.repaymentAmount.setText(currentItem.getRepaymentAmount().toString());
-        holder.repaymentAmount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setRepaymentAmount(getLayoutEditTextValueToBigDecimal(charSequence.toString())));
 
         holder.headerSection.setOnClickListener(v -> {
             int currentVisibility = holder.contentSection.getVisibility();
@@ -147,16 +136,7 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
                     holder.cardTitle.setText(holder.toDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
                 });
 
-        holder.loanType.setSelection(LoanType.getIndex(currentItem.getLoanType()));
         holder.paymentType.setSelection(PaymentPer.getIndex(currentItem.getPer()));
-        holder.loanType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                currentItem.setLoanType(adapterView.getSelectedItemPosition());
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
 
         holder.paymentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -170,7 +150,7 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
 
     @Override
     public int getItemCount() {
-        return loanList.size();
+        return subscriptionList.size();
     }
 
     public boolean validate(View v) {
@@ -179,4 +159,5 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
 
         return isValid;
     }
+
 }

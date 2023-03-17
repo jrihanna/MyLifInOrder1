@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mylifeinorder1.R;
 import com.example.mylifeinorder1.activity.adapter.LioAdapter;
 import com.example.mylifeinorder1.model.LioItem;
+import com.example.mylifeinorder1.model.enums.ActivityType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         lioItems.add(new LioItem(R.drawable.education_svg, "History of Education", ActivityType.EDUCATION));
         lioItems.add(new LioItem(R.drawable.insurance, "Insurances", ActivityType.INSURANCE));
         lioItems.add(new LioItem(R.drawable.loan_svg, "Loans", ActivityType.LOAN));
+        lioItems.add(new LioItem(R.drawable.subscribe, "Subscriptions", ActivityType.SUBSCRIPTION));
 
         buildRecyclerView(lioItems);
 
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case LOAN:
                     k = new Intent(MainActivity.this, LoanActivity.class);
+                    break;
+                case SUBSCRIPTION:
+                    k = new Intent(MainActivity.this, SubscriptionActivity.class);
                     break;
                 default:
                     k = new Intent(MainActivity.this, ResidenceActivity.class);

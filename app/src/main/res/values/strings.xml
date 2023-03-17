@@ -44,6 +44,7 @@
     <string name="repayment">Repayment</string>
     <string name="repayment_amount">Repayment Amount</string>
     <string name="initial_amount">Loan amount</string>
+    <string name="subscriber_name">Subscriber Name</string>
 
     <!-- Insurance -->
     <string-array name="payment_per">

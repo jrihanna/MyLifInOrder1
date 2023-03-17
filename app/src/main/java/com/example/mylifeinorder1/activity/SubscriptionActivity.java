@@ -1,39 +1,104 @@
 package com.example.mylifeinorder1.activity;
 
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-public class SubscriptionActivity { // extends HistoryActivity
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-    /*@Override
-    public LinearLayout createLayout() {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(10,0,0,0);
+import com.example.mylifeinorder1.R;
+import com.example.mylifeinorder1.activity.adapter.EducationAdapter;
+import com.example.mylifeinorder1.activity.adapter.SubscriptionAdapter;
+import com.example.mylifeinorder1.model.Address;
+import com.example.mylifeinorder1.model.Education;
+import com.example.mylifeinorder1.model.Employment;
+import com.example.mylifeinorder1.model.Subscription;
+import com.example.mylifeinorder1.util.Constants;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-        LinearLayout c = new LinearLayout(this);
-        c.setOrientation(LinearLayout.VERTICAL);
+import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-        EditText name = new EditText(this);
-        name.setLayoutParams(params);
-        name.setHint("Name");
+public class SubscriptionActivity extends AppCompatActivity {
+    List<Subscription> subscriptionList;
 
-        EditText fee = new EditText(this);
-        fee.setLayoutParams(params);
-        fee.setHint("Fee");
+    private SubscriptionAdapter mAdapter;
 
-        // TODO: switch to drop down list
-        EditText per = new EditText(this);
-        per.setLayoutParams(params);
-        per.setHint("Per");
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_subscription);
 
+        loadData();
+        buildRecyclerView();
 
-        c.addView(fee);
-        c.addView(per);
-        c.addView(createDates(this));
+        setInsertButton();
 
-        return c;
-    }*/
+        Button buttonSave = findViewById(R.id.save_button);
+        buttonSave.setOnClickListener(v -> saveData());
+    }
+
+    private void setInsertButton() {
+        Button buttonInsert = findViewById(R.id.add_button);
+        buttonInsert.setOnClickListener(v -> {
+            insertItem();
+        });
+    }
+
+    private void insertItem() {
+        subscriptionList.add(new Subscription(BigDecimal.ZERO, 0));
+        mAdapter.notifyItemInserted(subscriptionList.size());
+    }
+
+    private void buildRecyclerView() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(false);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mAdapter = new SubscriptionAdapter(subscriptionList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnDeleteItemClickListener(position -> {
+            subscriptionList.remove(position);
+            mAdapter.notifyItemRemoved(position);
+        });
+    }
+
+    private void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString(Constants.SHARED_PREFERENCE_EDUCATION, null);
+        Type type = new TypeToken<ArrayList<Employment>>() {}.getType();
+        this.subscriptionList = gson.fromJson(json, type);
+
+        if (this.subscriptionList == null) {
+            this.subscriptionList = new ArrayList<>();
+        }
+    }
+
+    private void saveData() {
+        if(this.subscriptionList == null)
+            this.subscriptionList = new ArrayList<>();
+
+        if(this.subscriptionList.size() > 0 && !mAdapter.validate(findViewById(R.id.recyclerView)))
+            return;
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(this.subscriptionList);
+        editor.putString(Constants.SHARED_PREFERENCE_EDUCATION, json);
+        editor.apply();
+
+        Toast.makeText(this, "Saved", Toast.LENGTH_LONG).show();
+    }
 }

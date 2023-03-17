@@ -1,6 +1,6 @@
 package com.example.mylifeinorder1.model;
 
-import com.example.mylifeinorder1.activity.ActivityType;
+import com.example.mylifeinorder1.model.enums.ActivityType;
 
 public class LioItem {
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activity.LoanActivity"
+    tools:context=".activity.SubscriptionActivity"
     android:background="#F8FFFE">
 
     <LinearLayout
@@ -22,9 +22,9 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                app:navigationIcon="@drawable/loan_svg"
+                app:navigationIcon="@drawable/subscribe"
                 app:popupTheme="@style/Theme.MyLifeInOrder1"
-                app:title="@string/loans"
+                app:title="@string/subscriptions"
                 app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:titleTextColor="@color/design_default_color_on_primary" />
         </com.google.android.material.appbar.AppBarLayout>

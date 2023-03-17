@@ -1,6 +1,7 @@
 package com.example.mylifeinorder1.activity.adapter;
 
 import static com.example.mylifeinorder1.util.ViewUtil.getLayoutEditTextValue;
+import static com.example.mylifeinorder1.util.ViewUtil.getLayoutEditTextValueToBigDecimal;
 import static com.example.mylifeinorder1.util.ViewUtil.showDateOnSelect;
 
 import android.text.TextUtils;
@@ -132,7 +133,7 @@ public class InsuranceAdapter extends RecyclerView.Adapter<InsuranceAdapter.Insu
         holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
 
         holder.amount.setText(currentItem.getAmount().toString());
-        holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setAmount(new BigDecimal(getLayoutEditTextValue(holder.amount))));
+        holder.amount.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setAmount(getLayoutEditTextValueToBigDecimal(charSequence.toString())));
 
         holder.companyNameEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setName(getLayoutEditTextValue(holder.companyNameEditText)));
 //        holder.phoneEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.setNumber(getLayoutEditTextValue(holder.phoneEditText)));
