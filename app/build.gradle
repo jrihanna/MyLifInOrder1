@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.mylifeinorder1'
+    namespace 'com.mlio.mylifeinorder.mylifeinorder1'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.mylifeinorder1"
+        applicationId "com.mlio.mylifeinorder.mylifeinorder1"
         minSdk 19
         targetSdk 33
         versionCode 1

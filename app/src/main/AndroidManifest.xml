@@ -12,7 +12,7 @@
         android:theme="@style/Theme.MyLifeInOrder1"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,58 +21,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.ResidenceActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.ResidenceActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".activity.EmploymentActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.EmploymentActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".activity.EducationActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.EducationActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".activity.InsuranceActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.InsuranceActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoanActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.LoanActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SubscriptionActivity"
+            android:name="com.mlio.mylifeinorder.mylifeinorder1.activity.SubscriptionActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
