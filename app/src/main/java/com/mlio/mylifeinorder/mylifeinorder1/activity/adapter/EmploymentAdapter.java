@@ -120,8 +120,6 @@ public class EmploymentAdapter extends RecyclerView.Adapter<EmploymentAdapter.Em
         holder.stateEditText.setText(currentItem.getAddress().getState());
         holder.postCodeEditText.setText(currentItem.getAddress().getPostCode());
 
-        holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
-
         holder.nameEditText.setText(currentItem.getName());
         holder.roleEditText.setText(currentItem.getRole());
         holder.phoneEditText.setText(currentItem.getNumber());
@@ -129,6 +127,8 @@ public class EmploymentAdapter extends RecyclerView.Adapter<EmploymentAdapter.Em
 
         holder.fromDateEditText.setText(currentItem.getFromDate() == null ? "" : currentItem.getFromDate().toString());
         holder.toDateEditText.setText(currentItem.getToDate() == null ? "" : currentItem.getToDate().toString());
+
+        holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
 
         holder.streetEditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setStreet(ViewUtil.getLayoutEditTextValue(holder.streetEditText)));
         holder.line2EditText.addTextChangedListener((CustomTextWatcher) (charSequence, i, i1, i2) -> currentItem.getAddress().setLine2(ViewUtil.getLayoutEditTextValue(holder.line2EditText)));
