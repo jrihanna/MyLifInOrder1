@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
         public EditText postCodeEditText;
         public EditText fromDateEditText;
         public EditText toDateEditText;
+        public ImageView clearToDate;
 
         public RelativeLayout contentSection;
         public RelativeLayout headerSection;
@@ -71,10 +73,15 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
             postCodeEditText = itemView.findViewById(R.id.post_code_edit_text);
             fromDateEditText = itemView.findViewById(R.id.from_date_view);
             toDateEditText = itemView.findViewById(R.id.to_date_view);
+            clearToDate = itemView.findViewById(R.id.clear_to_date);
             deleteButton = itemView.findViewById(R.id.delete_button);
 
             ViewUtil.showDateOnSelect(fromDateEditText, itemView.getContext());
             ViewUtil.showDateOnSelect(toDateEditText, itemView.getContext());
+
+            clearToDate.setOnClickListener(v -> {
+                toDateEditText.setText("");
+            });
 
             deleteButton.setOnClickListener(view -> {
                 if(listener != null) {
@@ -138,7 +145,7 @@ public class ResidenceAdapter extends RecyclerView.Adapter<ResidenceAdapter.Resi
         holder.toDateEditText.addTextChangedListener(
                 (CustomTextWatcher) (charSequence, i, i1, i2) -> {
                     currentItem.setToDate(getLayoutEditTextValue(charSequence.toString()));
-                    holder.cardTitle.setText(holder.toDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
+                    holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
                 });
 
         holder.headerSection.setOnClickListener(v -> {

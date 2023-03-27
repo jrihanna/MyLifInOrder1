@@ -65,4 +65,8 @@ public class ViewUtil {
             }
         });
     }
+
+    public static void addClearButtonListener() {
+
+    }
 }

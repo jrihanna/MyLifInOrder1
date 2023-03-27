@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
         public EditText fromDateEditText;
 
         public EditText toDateEditText;
+
+        public ImageView clearToDate;
 
         public EditText loanInstituteNameEditText;
 
@@ -79,10 +82,15 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
             contentSection = itemView.findViewById(R.id.content_section);
             headerSection = itemView.findViewById(R.id.header_section);
             cardTitle = itemView.findViewById(R.id.card_title);
+            clearToDate = itemView.findViewById(R.id.clear_to_date);
             deleteButton = itemView.findViewById(R.id.delete_button);
 
             ViewUtil.showDateOnSelect(fromDateEditText, itemView.getContext());
             ViewUtil.showDateOnSelect(toDateEditText, itemView.getContext());
+
+            clearToDate.setOnClickListener(v -> {
+                toDateEditText.setText("");
+            });
 
             deleteButton.setOnClickListener(view -> {
                 if(listener != null) {
@@ -142,7 +150,7 @@ public class LoanAdapter extends RecyclerView.Adapter<LoanAdapter.LoanViewHolder
         holder.toDateEditText.addTextChangedListener(
                 (CustomTextWatcher) (charSequence, i, i1, i2) -> {
                     currentItem.setToDate(getLayoutEditTextValue(charSequence.toString()));
-                    holder.cardTitle.setText(holder.toDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
+                    holder.cardTitle.setText(holder.fromDateEditText.getText().toString() + " - " + holder.toDateEditText.getText().toString());
                 });
 
         holder.loanType.setSelection(LoanType.getIndex(currentItem.getLoanType()));
